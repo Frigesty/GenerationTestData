@@ -11,29 +11,30 @@ public class HomeTest extends TestBase {
     void practiceFormTest() {
 
         registrationPage.openPage()
-                        .setFirstName("Airat")
-                        .setLastName("Karimov")
-                        .userEmailName("test@test.ru")
-                        .genderName("Male")
-                        .mobileName("9991111000")
-                        .dateBirthDate("02", "August", "1996")
-                        .setSubjectName("Maths")
-                        .setHobbiesName("Sports", "Music")
-                        .setPictureName("duck.jpg")
-                        .setAddressName("5212 CHURCH AVE BROOKLYN NY 11203-3555 USA")
-                        .setStateCityName("NCR", "Delhi")
-                        .clickSubmit();
+                .removeFooter()
+                .setFirstName("Airat")
+                .setLastName("Karimov")
+                .userEmailName("test@test.ru")
+                .chooseGender("Male")
+                .userMobileNumber("9991111000")
+                .chooseBirthDate("02", "August", "1996")
+                .writeAndChooseSubject("Maths")
+                .chooseHobbies("Sports", "Music")
+                .uploadPicture("duck.jpg")
+                .setAddressName("5212 CHURCH AVE BROOKLYN NY 11203-3555 USA")
+                .chooseStateAndCity("NCR", "Delhi")
+                .clickSubmit();
 
         registrationPage.verifyRegistrationResultsModalAppears()
-                        .verifyResult("Student Name", "Airat Karimov")
-                        .verifyResult("Student Email", "test@test.ru")
-                        .verifyResult("Gender", "Male")
-                        .verifyResult("Mobile", "9991111000")
-                        .verifyResult("Date of Birth", "02 August,1996")
-                        .verifyResult("Subjects", "Maths")
-                        .verifyResult("Hobbies", "Sports, Music")
-                        .verifyResult("Picture", "duck.jpg")
-                        .verifyResult("Address", "5212 CHURCH AVE BROOKLYN NY 11203-3555 USA")
-                        .verifyResult("State and City", "NCR Delhi");
+                .verifyResult("Student Name", "Airat Karimov")
+                .verifyResult("Student Email", "test@test.ru")
+                .verifyResult("Gender", "Male")
+                .verifyResult("Mobile", "9991111000")
+                .verifyResult("Date of Birth", "02 August,1996")
+                .verifyResult("Subjects", "Maths")
+                .verifyResult("Hobbies", "Sports, Music")
+                .verifyResult("Picture", "duck.jpg")
+                .verifyResult("Address", "5212 CHURCH AVE BROOKLYN NY 11203-3555 USA")
+                .verifyResult("State and City", "NCR Delhi");
     }
 }
