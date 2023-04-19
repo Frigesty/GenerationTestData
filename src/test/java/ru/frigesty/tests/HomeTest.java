@@ -1,40 +1,59 @@
 package ru.frigesty.tests;
 
+import com.github.javafaker.Faker;
 import org.junit.jupiter.api.Test;
 import ru.frigesty.pages.RegistrationPage;
+
+import static ru.frigesty.tests.TestData.*;
+import static ru.frigesty.utils.RandomUtils.*;
 
 public class HomeTest extends TestBase {
 
     RegistrationPage registrationPage = new RegistrationPage();
+    Faker faker = new Faker();
 
     @Test
     void practiceFormTest() {
 
+        String firstName = faker.name().firstName(),
+                lastName = faker.name().lastName(),
+               userEmail = faker.internet().emailAddress(),
+              userGender = getRandomItemFromArray(TestData.gender),
+              userNumber = 89 + faker.phoneNumber().subscriberNumber(8),
+              dayOfBirth = String.format("%02d", faker.number().numberBetween(1, 28)),
+            monthOfBirth = getRandomItemFromArray(months),
+             yearOfBirth = String.valueOf(getRandomInt(1901,2023)),
+                 subject = getRandomItemFromArray(subjects),
+                 hobbies = getRandomItemFromArray(hobbiess),
+          currentAddress = faker.address().streetAddress(),
+             randomState = getRandomItemFromArray(states),
+              randomCity = getRandomCity(randomState);
+
         registrationPage.openPage()
-                .removeFooter()
-                .setFirstName("Airat")
-                .setLastName("Karimov")
-                .userEmailName("test@test.ru")
-                .chooseGender("Male")
-                .userMobileNumber("9991111000")
-                .chooseBirthDate("02", "August", "1996")
-                .writeAndChooseSubject("Maths")
-                .chooseHobbies("Sports", "Music")
-                .uploadPicture("duck.jpg")
-                .setAddressName("5212 CHURCH AVE BROOKLYN NY 11203-3555 USA")
-                .chooseStateAndCity("NCR", "Delhi")
-                .clickSubmit();
+                        .removeFooter()
+                        .setFirstName(firstName)
+                        .setLastName(lastName)
+                        .userEmailName(userEmail)
+                        .chooseGender(userGender)
+                        .userMobileNumber(userNumber)
+                        .chooseBirthDate(dayOfBirth, monthOfBirth, yearOfBirth)
+                        .writeAndChooseSubject(subject)
+                        .chooseHobbies(hobbies)
+                        .uploadPicture("duck.jpg")
+                        .setAddressName(currentAddress)
+                        .chooseStateAndCity(randomState, randomCity)
+                        .clickSubmit();
 
         registrationPage.verifyRegistrationResultsModalAppears()
-                .verifyResult("Student Name", "Airat Karimov")
-                .verifyResult("Student Email", "test@test.ru")
-                .verifyResult("Gender", "Male")
-                .verifyResult("Mobile", "9991111000")
-                .verifyResult("Date of Birth", "02 August,1996")
-                .verifyResult("Subjects", "Maths")
-                .verifyResult("Hobbies", "Sports, Music")
-                .verifyResult("Picture", "duck.jpg")
-                .verifyResult("Address", "5212 CHURCH AVE BROOKLYN NY 11203-3555 USA")
-                .verifyResult("State and City", "NCR Delhi");
+                        .verifyResult("Student Name", firstName + " " + lastName)
+                        .verifyResult("Student Email", userEmail)
+                        .verifyResult("Gender", userGender)
+                        .verifyResult("Mobile", userNumber)
+                        .verifyResult("Date of Birth", dayOfBirth + " " + monthOfBirth + "," + yearOfBirth)
+                        .verifyResult("Subjects", subject)
+                        .verifyResult("Hobbies", hobbies)
+                        .verifyResult("Picture", "duck.jpg")
+                        .verifyResult("Address", currentAddress)
+                        .verifyResult("State and City", randomState + " " + randomCity);
     }
 }

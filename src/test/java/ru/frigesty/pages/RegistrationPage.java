@@ -14,19 +14,19 @@ public class RegistrationPage {
     ResultsModal resultsModal = new ResultsModal();
 
     SelenideElement firstNameInput = $("#firstName"),
-            lastNameInput = $("#lastName"),
-            userEmailInput = $("#userEmail"),
-            genderWrapper = $("#genterWrapper"),
-            numberInput = $("#userNumber"),
-            dateInput = $("#dateOfBirthInput"),
-            subjectsInput = $("#subjectsContainer input"),
-            hobbiesWrapper = $("#hobbiesWrapper"),
-            uploadPicture = $("#uploadPicture"),
-            addressInput = $("#currentAddress"),
-            stateInput = $("#state"),
-            cityInput = $("#city"),
-            stateCityWrapper = $("#stateCity-wrapper"),
-            submitButton = $("#submit");
+                     lastNameInput = $("#lastName"),
+                    userEmailInput = $("#userEmail"),
+                     genderWrapper = $("#genterWrapper"),
+                       numberInput = $("#userNumber"),
+                         dateInput = $("#dateOfBirthInput"),
+                     subjectsInput = $("#subjectsContainer input"),
+                    hobbiesWrapper = $("#hobbiesWrapper"),
+                     uploadPicture = $("#uploadPicture"),
+                      addressInput = $("#currentAddress"),
+                        stateInput = $("#state"),
+                         cityInput = $("#city"),
+                  stateCityWrapper = $("#stateCity-wrapper"),
+                      submitButton = $("#submit");
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -84,9 +84,8 @@ public class RegistrationPage {
         return this;
     }
 
-    public RegistrationPage chooseHobbies(String firstHobbies, String secondHobbies){
-        hobbiesWrapper.$(byText(firstHobbies)).click();
-        hobbiesWrapper.$(byText(secondHobbies)).click();
+    public RegistrationPage chooseHobbies(String value){
+        hobbiesWrapper.$(byText(value)).click();
 
         return this;
     }
